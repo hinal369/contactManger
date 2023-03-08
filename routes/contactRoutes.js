@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ContactController = require('../controller/contactController');
+const validateToken = require('../middleware/validateTokenHandler');
 
 // router.route('/').get((req, res) => {
 //     try {
@@ -16,6 +17,7 @@ const ContactController = require('../controller/contactController');
 // router.put('/:id', ContactController.updateContact);
 // router.delete('/:id', ContactController.deleteContact);
     
+router.use(validateToken);
 router.route('/').get(ContactController.getContacts).post(ContactController.createContact);
 router.route('/:id').get(ContactController.getContact).put(ContactController.updateContact).delete(ContactController.deleteContact);
 
